@@ -14,13 +14,13 @@ pattern = r"\s{2,}" # regex to match multpile whitespaces in the text
 
 leaders_data = {}
 
-session = requests.Session()
+session = requests.Session() #create a session
 
 # function to refresh cookies if they expire
 def refresh_cookies():
     response = session.get(root_url + cookies_endpoint)
     if response.status_code == 200:
-        session.cookies.update(response.cookies)
+        session.cookies.update(response.cookies) #keep session authetincated for future requests
     else:
         print(f"Failed to get cookie: {response.status_code}")
         
@@ -61,9 +61,9 @@ def get_leaders(country):
 
 
 #function to get first paragraph
-def get_first_paragraph(wikipdedia_url):
-    headers = {"User-Agent": "Mozilla/5.0"}
-    response = session.get(wikipdedia_url, headers=headers)
+def get_first_paragraph(wikipedia_url):
+    headers = {"User-Agent": "Mozilla/5.0"} #needed by wiki
+    response = session.get(wikipedia_url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
     container = (soup.find("div", {"class": "mw-content-ltr mw-parser-output"}) or soup.find("div", {"class": "mw-parser-output"}))
     first_paragraph = ""
@@ -85,3 +85,9 @@ def update_leaders_data():
 update_leaders_data()        
         
 
+#function to export data to json
+def export_to_json(filepath):
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(leaders_data, f, ensure_ascii=False, indent=4)
+
+export_to_json("leaders.json")
