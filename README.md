@@ -78,7 +78,7 @@ In the root of the project a `leaders.json` file will be generated
             "end_mandate": "2008-03-20",
             "first_paragraph": "Guy Maurice Marie Louise Verhofstadt uitspraak Dendermonde 11 april 1953 is een Belgisch politicus voor de Open Vlaamse Liberalen en Democraten Open Vld Hij was premier van België van 12 juli 1999 tot 20 maart 2008 in drie regeringen Hij beëindigde zijn actieve politieke carrière in het Europees Parlement waar hij van 2009 tot 2019 fractieleider van de Alliantie van Liberalen en Democraten voor Europa ALDE was 6"
         },
-}        
+} 
 ```
 
 ---------
