@@ -89,5 +89,3 @@ update_leaders_data()
 def export_to_json(filepath):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(leaders_data, f, ensure_ascii=False, indent=4)
-
-export_to_json("leaders.json")
