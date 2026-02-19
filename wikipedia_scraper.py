@@ -10,7 +10,7 @@ countries_endpoint = "countries"
 cookies_endpoint = "cookie"
 leaders_endpoint = "leaders"
 
-pattern = r"\s{2,}" # regex to match multpile whitespaces in the text
+pattern = r"\[\d+\]|[^\w]+" # regex to match digits between brackets and anything that's not a letter or digit
 
 leaders_data = {}
 
@@ -59,21 +59,24 @@ def get_leaders(country):
         print(f"Failed to get leaders for {country}: {response.status_code}")
         return None            
 
-
 #function to get first paragraph
 def get_first_paragraph(wikipedia_url):
     headers = {"User-Agent": "Mozilla/5.0"} #needed by wiki
     response = session.get(wikipedia_url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
+    
     container = (soup.find("div", {"class": "mw-content-ltr mw-parser-output"}) or soup.find("div", {"class": "mw-parser-output"}))
+    
     first_paragraph = ""
     for p in container.find_all("p"):
         if p.text.strip():
             first_paragraph = p.text
             break
+        
     first_paragraph = re.sub(pattern, " ", first_paragraph)
+    first_paragraph = re.sub(r"\s+", " ", first_paragraph).strip() #remove double whitespace
+    
     return first_paragraph
-
 
 #function to updat leaders data with first paragraph
 def update_leaders_data():
@@ -82,8 +85,6 @@ def update_leaders_data():
         for leader in leaders_data[country]:
             leader["first_paragraph"] = get_first_paragraph(leader["wikipedia_url"])
         time.sleep(1) # to avoid overwhelming the server
-update_leaders_data()        
-        
 
 #function to export data to json
 def export_to_json(filepath):
