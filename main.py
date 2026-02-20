@@ -1,4 +1,4 @@
-from wikipedia_scraper import update_leaders_data, export_to_json
+from wikipedia_scraper import update_leaders_data, export_to_json, save_to_csv
 
 
 
@@ -10,3 +10,6 @@ if __name__ == "__main__":
     export_to_json("leaders.json")
     
     print("Your 'leaders.json' file was created succesfully...")
+    
+    print("Saving data into CSV...")
+    save_to_csv("leaders.csv")

@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import json
+import csv
 import time
 
 root_url = "https://country-leaders.onrender.com/"
@@ -91,3 +92,13 @@ def update_leaders_data():
 def export_to_json(filepath):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(leaders_data, f, ensure_ascii=False, indent=4)
+
+
+#function to export data to csv
+def save_to_csv(filepath):
+    with open(filepath, "w", newline='', encoding="utf-8") as csvfile:
+        fieldnames = ["id", "first_name", "last_name", "birth_date", "death_date", "place_of_birth", "wikipedia_url", "start_mandate", "end_mandate", "first_paragraph"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, extrasaction="ignore", )
+        writer.writeheader()
+        for country in leaders_data:
+            writer.writerows(leaders_data[country])
