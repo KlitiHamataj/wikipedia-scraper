@@ -10,6 +10,7 @@ A Python scraper that retrieves political leaders for each country from an API, 
 2. For every leader it scrapes thei Wikipedia page and extract the first paragraph form their bio
 3. Cleans the text (removes citations like `[1]`, extra whitespace, etc.)
 4. Saves all the updated data into a JSON file
+5. Saves all the updated data into a CSV file
 
 ----------
 
@@ -57,7 +58,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-In the root of the project a `leaders.json` file will be generated
+In the root of the project a `leaders.json` and a `leaders.csv` file will be generated
 
 ---------
 
@@ -81,6 +82,14 @@ In the root of the project a `leaders.json` file will be generated
     ]    
 }
 ```
+
+## CSV Output Example
+
+| id | first_name | last_name | birth_date | place_of_birth | wikipedia_url | first_paragraph |
+|---|---|---|---|---|---|---|
+| 1 | Joe | Biden | 1942-11-20 | Scranton, PA | https://en.wikipedia.org/wiki/Joe_Biden | Joseph Biden is an American politician... |
+| 2 | Barack | Obama | 1961-08-04 | Honolulu, HI | https://en.wikipedia.org/wiki/Barack_Obama | Barack Obama is an American politician... |
+
 
 ---------
 
