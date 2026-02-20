@@ -65,11 +65,12 @@ def get_first_paragraph(wikipedia_url):
     response = session.get(wikipedia_url, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
     
-    container = (soup.find("div", {"class": "mw-content-ltr mw-parser-output"}) or soup.find("div", {"class": "mw-parser-output"}))
+    container = (soup.find("div", {"class": "mw-content-ltr mw-parser-output"}) 
+                or soup.find("div", {"class": "mw-parser-output"}))
     
     first_paragraph = ""
     for p in container.find_all("p"):
-        if p.text.strip():
+        if p.find("b") and p.text.strip():
             first_paragraph = p.text
             break
         
